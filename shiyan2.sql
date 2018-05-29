@@ -1,4 +1,5 @@
 CREATE DATABASE B16112011test2;
+
 CREATE TABLE TITLE(
 MNO CHAR(10) PRIMARY KEY,
 MNAME CHAR(50) UNIQUE,
@@ -16,16 +17,16 @@ MTAG CHAR(20),
 
 INSERT INTO TITLE(MNO,MNAME)
 VALUES
-(1,'Ф��˵ľ���'),
-(2,'������'),
-(3,'���ɱ�ֲ�̫��'),
-(4,'��������'),
-(5,'��������'),
-(6,'ǧ��ǧѰ'),
-(7,'̩̹��˺�'),
-(8,'�����յ�����'),
-(9,'���οռ�'),
-(10,'�������ܶ�Ա');
+(1,'肖申克的救赎'),
+(2,'霸王别姬'),
+(3,'这个杀手不太冷'),
+(4,'阿甘正传'),
+(5,'美丽人生'),
+(6,'千与千寻'),
+(7,'泰坦尼克号'),
+(8,'辛德勒的名单'),
+(9,'盗梦空间'),
+(10,'机器人总动员');
 SELECT * FROM TITLE
 
 INSERT INTO RATING(MNO,MSCORE)
@@ -43,47 +44,47 @@ VALUES
 
 INSERT INTO TAG(MNO,MTAG)
 VALUES
-(1,'����'),
-(2,'ͬ��'),
-(3,'����'),
-(4,'����'),
-(5,'����'),
-(6,'����'),
-(7,'����'),
-(8,'����'),
-(9,'�ƻ�'),
-(10,'����');
+(1,'犯罪'),
+(2,'同性'),
+(3,'犯罪'),
+(4,'剧情'),
+(5,'剧情'),
+(6,'动画'),
+(7,'灾难'),
+(8,'剧情'),
+(9,'科幻'),
+(10,'动画');
 
---ѡ�����ִ��ڵ���9.4�ĵ�Ӱ
+--选择评分大于等于9.4的电影
 SELECT TITLE.MNAME,RATING.MSCORE
 FROM TITLE,RATING
 WHERE TITLE.MNO=RATING.MNO AND MSCORE>=9.4;
 
---ѡ�����Ϊ'����'�ĵ�Ӱ
+--选择分类为'剧情'的电影
 SELECT TITLE.MNAME,TAG.MTAG
 FROM TITLE,TAG
-WHERE TITLE.MNO=TAG.MNO AND MTAG='����';
+WHERE TITLE.MNO=TAG.MNO AND MTAG='剧情';
 
---���µ�ʮ����Ӱ�ķ���Ϊ'�ƻ�'������Ϊ9.1
+--更新第十部电影的分类为'科幻'，评分为9.1
 UPDATE TAG
-SET MTAG='�ƻ�'
+SET MTAG='科幻'
 WHERE MNO=10;
 
 UPDATE RATING
 SET MSCORE=9.1
 WHERE MNO=10;
 
---ѡ��������10�ĵ�Ӱ
+--选择排名第10的电影
 SELECT MNAME,MTAG,MSCORE
 FROM TITLE,TAG,RATING
 WHERE TITLE.MNO=10 AND TAG.MNO=10 AND RATING.MNO=10;
 
---��Ȼ����
+--自然连接
 SELECT TITLE.MNO,TITLE.MNAME,RATING.MSCORE,TAG.MTAG
 FROM TITLE,RATING,TAG
 WHERE TITLE.MNO=RATING.MNO AND RATING.MNO=TAG.MNO;
 
---ɾ��������ʮ�ĵ�Ӱ
+--删除排名第十的电影
 DELETE
 FROM TITLE
 WHERE TITLE.MNO=10;
